@@ -25,8 +25,7 @@ const GalleryPage = () => {
   return (
     <SectionWrapper title="Gallery" subtitle="Snapshots">
       <p className="mb-6 max-w-3xl text-sm leading-relaxed text-slate-300 sm:text-base">
-        Gallery data is served from mock JSON through the same service layer pattern used for the rest of the portfolio and can be
-        switched to backend media endpoints later.
+        Gallery data is now served from backend API endpoints through the same frontend service layer.
       </p>
 
       {loading ? (

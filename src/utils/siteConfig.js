@@ -7,24 +7,3 @@ export const navLinks = [
   { label: 'Experience', path: '/experience' },
   { label: 'Contact', path: '/contact' },
 ]
-
-export const skillGroups = [
-  {
-    title: 'Languages',
-    skills: ['Python', 'JavaScript', 'HTML', 'CSS'],
-  },
-  {
-    title: 'Frameworks',
-    skills: ['Django', 'Django REST Framework', 'FastAPI', 'GraphQL'],
-  },
-  {
-    title: 'Databases',
-    skills: ['MySQL', 'PostgreSQL', 'SQLite'],
-  },
-  {
-    title: 'Tools',
-    skills: ['Git', 'GitHub', 'Docker', 'AWS', 'Celery', 'JWT', 'Stripe', 'Postman'],
-  },
-]
-
-export const typingSkills = ['Django APIs', 'FastAPI Services', 'GraphQL Integrations', 'Asynchronous Task Processing']

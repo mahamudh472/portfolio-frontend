@@ -85,7 +85,7 @@ const BlogDetailsPage = () => {
     return (
       <SectionWrapper title="Blog Not Found" subtitle="404">
         <div className="glass-card rounded-2xl p-6">
-          <p className="text-slate-300">The blog post does not exist in current mock data.</p>
+          <p className="text-slate-300">The blog post does not exist in current records.</p>
           <Link to="/blog" className="mt-4 inline-flex rounded-lg bg-sky-400 px-4 py-2 text-sm font-semibold text-slate-950">
             Back to Blog
           </Link>

@@ -1,15 +1,35 @@
+import { useEffect, useState } from 'react'
+import Loader from '../components/Loader'
 import SectionWrapper from '../components/SectionWrapper'
-
-const socialLinks = [
-  { label: 'Email', href: 'mailto:mahadymahamudh472@gmail.com', icon: 'EM' },
-  { label: 'GitHub', href: 'https://github.com/mahamudh472', icon: 'GH' },
-  { label: 'LinkedIn', href: 'https://linkedin.com/in/mahamudh471', icon: 'LI' },
-  { label: 'Phone', href: 'tel:+8801926615570', icon: 'PH' },
-]
+import { getContactSection } from '../services/portfolioService'
 
 const ContactPage = () => {
+  const [contactContent, setContactContent] = useState({ connectTitle: '', connectDescription: '', socialLinks: [] })
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const loadContactContent = async () => {
+      try {
+        const result = await getContactSection()
+        setContactContent({
+          connectTitle: result?.connectTitle || '',
+          connectDescription: result?.connectDescription || '',
+          socialLinks: result?.socialLinks || [],
+        })
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadContactContent()
+  }, [])
+
   return (
     <SectionWrapper title="Contact" subtitle="Get in Touch">
+      {loading ? (
+        <Loader label="Loading contact section..." />
+      ) : (
+        <>
       <div className="grid gap-6 lg:grid-cols-2">
         <form className="glass-card rounded-2xl p-6" onSubmit={(event) => event.preventDefault()}>
           <div className="space-y-4">
@@ -48,12 +68,12 @@ const ContactPage = () => {
 
         <div className="glass-card rounded-2xl p-6">
           <p className="text-sm uppercase tracking-[0.2em] text-sky-300">Connect</p>
-          <h3 className="mt-2 text-xl font-semibold text-slate-100">Let us build something dependable.</h3>
+          <h3 className="mt-2 text-xl font-semibold text-slate-100">{contactContent.connectTitle}</h3>
           <p className="mt-3 text-sm leading-relaxed text-slate-300">
-            Dinajpur, Bangladesh. Reach out for backend engineering roles, Django/FastAPI projects, and API-focused development work.
+            {contactContent.connectDescription}
           </p>
           <div className="mt-5 flex flex-wrap gap-2">
-            {socialLinks.map((link) => (
+            {contactContent.socialLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
@@ -70,6 +90,8 @@ const ContactPage = () => {
           </div>
         </div>
       </div>
+        </>
+      )}
     </SectionWrapper>
   )
 }

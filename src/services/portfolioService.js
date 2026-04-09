@@ -1,45 +1,48 @@
-import apiClient, { buildMockAdapter } from './apiClient'
-import projects from '../data/projects.json'
-import experience from '../data/experience.json'
-import blogs from '../data/blogs.json'
-import gallery from '../data/gallery.json'
+import apiClient from './apiClient'
+
+const getSectionContent = async (sectionName) => {
+  const response = await apiClient.get(`/sections/${sectionName}`)
+  return response.data?.data || {}
+}
 
 export const getProjects = async () => {
-  const response = await apiClient.get('/projects', {
-    adapter: buildMockAdapter(projects, 1200),
-  })
+  const response = await apiClient.get('/projects')
 
   return response.data
 }
 
 export const getExperience = async () => {
-  const response = await apiClient.get('/experience', {
-    adapter: buildMockAdapter(experience, 700),
-  })
+  const response = await apiClient.get('/experience')
 
   return response.data
 }
 
 export const getBlogs = async () => {
-  const response = await apiClient.get('/blogs', {
-    adapter: buildMockAdapter(blogs, 1000),
-  })
+  const response = await apiClient.get('/blogs')
 
   return response.data
 }
 
 export const getBlogBySlug = async (slug) => {
-  const response = await apiClient.get(`/blogs/${slug}`, {
-    adapter: buildMockAdapter(blogs.find((post) => post.slug === slug) || null, 700),
-  })
-
-  return response.data
+  try {
+    const response = await apiClient.get(`/blogs/${slug}`)
+    return response.data
+  } catch (error) {
+    if (error?.response?.status === 404) {
+      return null
+    }
+    throw error
+  }
 }
 
 export const getGalleryItems = async () => {
-  const response = await apiClient.get('/gallery', {
-    adapter: buildMockAdapter(gallery, 900),
-  })
+  const response = await apiClient.get('/gallery')
 
   return response.data
 }
+
+export const getHomeSection = async () => getSectionContent('home')
+
+export const getAboutSection = async () => getSectionContent('about')
+
+export const getContactSection = async () => getSectionContent('contact')

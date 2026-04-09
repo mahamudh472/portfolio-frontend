@@ -25,8 +25,7 @@ const BlogPage = () => {
   return (
     <SectionWrapper title="Blog" subtitle="Markdown Ready">
       <p className="mb-6 max-w-3xl text-sm leading-relaxed text-slate-300 sm:text-base">
-        These posts are loaded from mock JSON through the API service layer. Later, you can replace the mock adapter with real backend
-        endpoints and markdown content from your editor.
+        These posts are loaded from backend API endpoints, with markdown content rendered directly in the article details view.
       </p>
 
       {loading ? (

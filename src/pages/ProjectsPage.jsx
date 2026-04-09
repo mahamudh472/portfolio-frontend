@@ -23,7 +23,7 @@ const ProjectsPage = () => {
   }, [])
 
   return (
-    <SectionWrapper title="Projects" subtitle="Mock API + Axios">
+    <SectionWrapper title="Projects" subtitle="Portfolio Work">
       {loading ? (
         <>
           <Loader label="Fetching projects..." />
